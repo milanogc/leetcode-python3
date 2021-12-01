@@ -17,11 +17,14 @@ class Solution:
         height = len(grid)
         width = len(grid[0])
         rotten_oranges = deque([])
+        fresh_oranges = 0
 
         for row in range(height):
             for col in range(width):
                 if grid[row][col] == ROTTEN_ORANGE:
-                    rotten_oranges.append((row, col, 0))
+                    rotten_oranges.append((row, col, 0)) # (row, column, minute orange is rotten)
+                elif grid[row][col] == FRESH_ORANGE:
+                    fresh_oranges += 1
 
         minutes = 0
 
@@ -32,12 +35,11 @@ class Solution:
             for r, c in DIRECTIONS:
                 if 0 <= row + r < height and 0 <= col + c < width and grid[row + r][col + c] == FRESH_ORANGE:
                     grid[row + r][col + c] = ROTTEN_ORANGE
+                    fresh_oranges -= 1
                     rotten_oranges.append((row + r, col + c, current_minute + 1))
 
-        for row in range(height):
-            for col in range(width):
-                if grid[row][col] == FRESH_ORANGE:
-                    return -1
+        if fresh_oranges > 0:
+            return -1
 
         return minutes
 

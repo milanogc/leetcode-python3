@@ -22,21 +22,26 @@ class Solution:
         for row in range(height):
             for col in range(width):
                 if grid[row][col] == ROTTEN_ORANGE:
-                    rotten_oranges.append((row, col, 0)) # (row, column, minute orange is rotten)
+                    rotten_oranges.append((row, col))
                 elif grid[row][col] == FRESH_ORANGE:
                     fresh_oranges += 1
 
+        oranges_per_level = len(rotten_oranges)
         minutes = 0
 
         while rotten_oranges:
-            row, col, current_minute = rotten_oranges.popleft()
-            minutes = max(minutes, current_minute)
+            if oranges_per_level == 0:
+                minutes += 1
+                oranges_per_level = len(rotten_oranges)
+
+            row, col = rotten_oranges.popleft()
+            oranges_per_level -= 1
 
             for r, c in DIRECTIONS:
                 if 0 <= row + r < height and 0 <= col + c < width and grid[row + r][col + c] == FRESH_ORANGE:
                     grid[row + r][col + c] = ROTTEN_ORANGE
                     fresh_oranges -= 1
-                    rotten_oranges.append((row + r, col + c, current_minute + 1))
+                    rotten_oranges.append((row + r, col + c))
 
         if fresh_oranges > 0:
             return -1
@@ -57,3 +62,4 @@ assert Solution().orangesRotting([[2,1,1],[1,1,0],[0,1,1]]) == 4
 assert Solution().orangesRotting([[2,1,1],[0,1,1],[1,0,1]]) == -1
 assert Solution().orangesRotting([[0,2]]) == 0
 assert Solution().orangesRotting([[2,1,1],[1,1,1],[0,1,2]]) == 2
+assert Solution().orangesRotting([[0]]) == 0

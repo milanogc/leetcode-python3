@@ -3,7 +3,7 @@
 bad = None
 
 def isBadVersion(n: int) -> bool:
-    return n == bad
+    return n >= bad
 
 class Solution:
     def firstBadVersion(self, n: int) -> bool:

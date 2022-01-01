@@ -19,5 +19,7 @@ class Solution:
         
         return -1
 
+# Tests
+
 assert Solution().search(nums = [-1,0,3,5,9,12], target = 9) == 4
 assert Solution().search(nums = [-1,0,3,5,9,12], target = 2) == -1

@@ -42,10 +42,10 @@ class Solution:
 # Tests
 
 assert Solution().wallsAndGates([
-    [INF,  -1,  0,  INF],
-    [INF, INF, INF,  -1],
-    [INF,  -1, INF,  -1],
-    [0,  -1, INF, INF]
+    [INF, -1, 0, INF],
+    [INF, INF, INF, -1],
+    [INF, -1, INF, -1],
+    [0, -1, INF, INF]
 ]) == [
     [3, -1, 0, 1],
     [2, 2, 1, -1],

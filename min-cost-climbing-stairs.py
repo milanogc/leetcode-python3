@@ -5,12 +5,13 @@ from typing import List
 
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
-        n = len(cost)
+        c1 = cost[0]
+        c2 = cost[1]
 
-        for i in range(2, n):
-            cost[i] += min(cost[i - 1], cost[i - 2])
+        for i in range(2, len(cost)):
+            c1, c2 = c2, cost[i] + min(c1, c2)
 
-        return min(cost[n - 1], cost[n - 2])
+        return min(c1, c2)
 
 
 # Tests

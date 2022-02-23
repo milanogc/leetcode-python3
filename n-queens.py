@@ -14,6 +14,7 @@ class Solution:
         def recursive(row: int):
             if row == n:
                 ans.append(["".join(board[i]) for i in range(n)])
+                return
 
             for col in range(n):
                 pos_diag = row + col
@@ -38,6 +39,8 @@ class Solution:
         recursive(0)
         return ans
 
+
+# Tests
 
 assert Solution().solveNQueens(4) == [
     [".Q..", "...Q", "Q...", "..Q."],
